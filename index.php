@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 	<!DOCTYPE html>
 	<html lang="zxx" class="no-js">
 	<head>
@@ -16,8 +19,7 @@
 
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-		<link href="https://unpkg.com/survey-jquery@1.8.54/survey.css" type="text/css" rel="stylesheet" />
-		<script src="https://unpkg.com/survey-jquery@1.8.54/survey.jquery.min.js"></script>
+		
 				
 		<!-- Site Title -->
 		
@@ -75,7 +77,7 @@
 							<p class="text-white">
 								Chame-nos, resolvemos qualquer problema. Atendemos 24 horas por dia, 7 dias por semana
 							</p>
-							<a href="#" class="primary-btn text-uppercase">Fale pelo whatsapp</a>
+							<a href="https://api.whatsapp.com/send?phone=5534998318515&text=Ol%C3%A1%2C%20preciso%20de%20uma%20solu%C3%A7%C3%A3o" class="primary-btn text-uppercase">Fale pelo whatsapp</a>
 						</div>											
 					</div>
 				</div>
@@ -89,9 +91,10 @@
 					<div class="row align-items-center">
 						<div class="col-lg-5 col-sm-12 quote-left">
 							<h2 class="text-right">
-								<span>Excelência</span> no trabalho<br>
-								nosso serviço é reconhecido<br>
-								<span>por quem consome</span>.
+								<span>Excelência</span> 
+								naquilo<br>
+								
+								<span>que faz</span>.
 							</h2>
 						</div>
 						<div class="col-lg-7 col-sm-12 quote-right">
@@ -207,7 +210,10 @@ sua saúde!
 								<div class="play-btn-wrap">
 									
 									<img src="https://img.icons8.com/material/48/ffffff/instagram-new--v1.png"/>
+									
+									<a href="https://www.facebook.com/pg/Desentupidora-Hidrojetta-106411178210876/photos/?ref=page_internal">
 									<img src="https://img.icons8.com/material/48/ffffff/facebook--v1.png"/>
+									</a>
 								</div>								
 							</div>
 						</div>
@@ -261,8 +267,63 @@ sua saúde!
 				<br>
 				<br>
 				<br>
-	
-					<div id="surveyContainer" class="container "></div>
+				<?php
+  if(isset($_SESSION['msg'])):
+    echo $_SESSION['msg'];
+    unset($_SESSION['msg']);
+  endif;
+  ?>
+  
+				<div class="container">
+					<div class="row">
+					  <div class="col-md-12 col-md-offset-3">
+						<div class="well well-sm">
+						  <form class="form-horizontal form-test" action="mail.php" method="post">
+						  <fieldset>
+							<legend class="text-center">Fale conosco!</legend>
+					
+							<!-- Name input-->
+							<div class="form-group bg-dark">
+							  <label class="col-md-3 control-label bg-dark" for="name">Nome</label>
+							  <div class="col-md-9">
+								<input id="name" name="name" type="text" placeholder="Seu nome" class="form-control ">
+							  </div>
+							</div>
+					
+							<!-- Email input-->
+							<div class="form-group">
+							  <label class="col-md-3 control-label" for="email">Seu E-mail</label>
+							  <div class="col-md-9">
+								<input id="email" name="email" type="text" placeholder="seu email" class="form-control">
+							  </div>
+							</div>
+							<div class="form-group">
+							  <label class="col-md-3 control-label" for="email">Seu Número</label>
+							  <div class="col-md-9">
+								<input id="phone" name="phone" type="tel" placeholder="seu número" class="form-control">
+							  </div>
+							</div>
+							<!-- Message body -->
+							<div class="form-group">
+							  <label class="col-md-3 control-label" for="message">Deixe seu recado</label>
+							  <div class="col-md-9">
+								<textarea class="form-control" id="message" name="message" placeholder="Deixe seu recado aqui..." rows="5"></textarea>
+							  </div>
+							</div>
+					
+							<!-- Form actions -->
+				
+							 
+								<button type="submit"  name="btn-cadastrar" class="btn btn-primary btn-lg justify-content-center">Enviar</button>
+					
+					
+						  </fieldset>
+						  </form>
+						</div>
+					  </div>
+					</div>
+				</div>
+				</div>
 					<br>
 					<br>
 					<br>
@@ -281,8 +342,12 @@ sua saúde!
 			<br>
 			<br>
 
-				<div id="surveyContainer"></div>
-			</div>
+			<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+			<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+			<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+			<!------ Include the above in your HEAD tag ---------->
+			
+
 			
 			<!--End Survey Form-->
 			
@@ -313,22 +378,7 @@ sua saúde!
 			<script src="js/main.js"  type="text/javascript"></script>	
 			<script src="https://unpkg.com/survey-jquery@1.8.54/survey.jquery.min.js"></script>
 			<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>	
-			<script type="text/javascript">
-			
-			Survey.StylesManager.applyTheme("darkblue");
-
-				var surveyJSON = {title:"Fale conosco!",pages:[{name:"page1",elements:[{type:"text",name:"question1",title:"Nome"},{type:"text",name:"question2",title:"Contato"},{type:"comment",name:"question3",title:"Deixe sua mensagem"}]}]}
-				
-				function sendDataToServer(survey) {
-					survey.sendResult('b406611f-e4d9-43c8-8b1f-245ffb52dd5f');
-				}
-				
-				var survey = new Survey.Model(surveyJSON);
-				$("#surveyContainer").Survey({
-					model: survey,
-					onComplete: sendDataToServer
-				});
-			</script>
+		
 		</body>
 	</html>
 
